@@ -28,7 +28,7 @@ def encode_bitstream(channel, button, on):
     result = []
     for i in range(6):
         result = result + BIT_CODE[channel-1] + BIT_CODE[button-1] + UNKNOWN_CODE
-        result = result + ON_CODE if on == 1 else result + OFF_CODE
+        result = result + ON_CODE if on else result + OFF_CODE
         result = result + SYNC
     return result
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     parser.add_option("-b", "--button", type="int", default=1)
     parser.add_option("-c", "--channel", type="int", default=1)
     parser.add_option("-g", "--gpio", type="int", default=0)
-    parser.add_option("-v", "--verbose", action="store_true", default = False)
+    parser.add_option("-v", "--verbose", action="store_true", default=False)
     (options, args) = parser.parse_args()
     on = True if len(args) == 0 or args[0] != "off" else False
     pin = WiringPin(options.gpio).export()
