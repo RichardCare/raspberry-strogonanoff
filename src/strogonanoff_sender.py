@@ -4,9 +4,9 @@ from time import time
 from strogonanoff_common import *
 
 def print_bitstream(state_list):
-    val = ""
-    for state in state_list: val += str(state)
-    print "data:", val
+    val = []
+    for state in state_list: val.append(str(state))
+    print "data:", ''.join(val)
 
 def print_send_info(pin_number, pulse_width, state_list):
     print "send to pin:", pin_number.gpio_number, \
@@ -21,22 +21,21 @@ def send_bitstream(pin_number, state_list, verbose, pulse_width):
     end_time = time()
     for state in state_list:
         end_time = end_time + pulse_width
-        pin.set_value(state)
+        pin_number.set_value(state)
         busy_wait_until(end_time)
 
 def encode_bitstream(channel, button, on):
     result = []
     for i in range(6):
-        result = result + BIT_CODE[channel-1] + BIT_CODE[button-1] + UNKNOWN_CODE
-        result = result + ON_CODE if on else result + OFF_CODE
-        result = result + SYNC
+        result.extend(BIT_CODE[channel-1] + BIT_CODE[button-1] + UNKNOWN_CODE)
+        result.extend(ON_CODE if on else OFF_CODE)
+        result.extend(SYNC)
     return result
 
 def send_command(pin, channel, button, on, verbose, pulse_width=DEFAULT_PULSE_WIDTH):
     send_bitstream(pin, encode_bitstream(channel, button, on), verbose, pulse_width)
 
-if __name__ == "__main__":
-
+def main():
     from WiringPin import WiringPin
     from optparse import OptionParser
 
@@ -49,4 +48,6 @@ if __name__ == "__main__":
     on = True if len(args) == 0 or args[0] != "off" else False
     pin = WiringPin(options.gpio).export()
     send_command(pin, options.channel, options.button, on, options.verbose)
-
+ 
+if __name__ == "__main__":
+    main()
