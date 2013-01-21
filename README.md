@@ -1,6 +1,10 @@
+# NAME
 Raspberry Strogonanoff
-======================
 
+# SYNOPSIS
+**strogonanoff_sender.py** [OPTIONS] [on|off]
+
+# DESCRIPTION
 A Raspberry Pi Remote Mains Switcher, to switch these
 
 http://www.maplin.co.uk/remote-controlled-mains-sockets-5-pack-348217
@@ -13,9 +17,25 @@ using the documentation of the protocol detailed here
 
 http://elektronikforumet.com/wiki/index.php/RF_Protokoll_-_Nexa/Proove_%28%C3%A4ldre,_ej_sj%C3%A4lvl%C3%A4rande%29
 
+# OPTIONS
+    -v, --verbose   enable verbose logging
+    -g, --gpio      the GPIO pin of the Raspberry Pi to control (default is 0)
+    -c, --channel   'channel' number to send to
+                    The 'channel' number sets the 'code' group to send.
+                    On the receiving socket device the 'code adjustment dial'
+                    is labelled I, II, III & IV, the same as on the remote
+                    control's 'code adjustment switch', but this parameter
+                    requires 1, 2, 3 or 4 (default is 1).
+    -b, --button    'button' number to 'press'
+                    The remote control has 8 buttons arranged in 4 rows. This
+                    parameter sets the row of buttons being 'pressed'. On the
+                    receiving socket device the 'channel adjustment dial'
+                    sets which button row corresponds to which receiving
+                    socket device, values are 1, 2, 3 or 4 (default is 1)
+    [on|off]        whether to send a 'turn on' command or a 'turn off'
+                    command (default is on)
 
-Installation
-------------
+# INSTALLATION
 
 Requires WiringPi-Python
 
@@ -26,8 +46,7 @@ Requires WiringPi-Python
     sudo apt-get install python-setuptools
     sudo python setup.py install
 
-Running
--------
+# EXAMPLE
 
 Needs to be run as root - 
 
