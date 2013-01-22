@@ -5,17 +5,26 @@ Raspberry Strogonanoff
 **strogonanoff_sender.py** [OPTIONS] [on|off]
 
 # DESCRIPTION
-A Raspberry Pi Remote Mains Switcher, to switch these
+A Raspberry Pi Remote Mains Switcher, to switch these:
 
 http://www.maplin.co.uk/remote-controlled-mains-sockets-5-pack-348217
 
-with one of these
+with one of these:
 
 http://proto-pic.co.uk/434mhz-rf-link-transmitter/
 
-using the documentation of the protocol detailed here
+using the documentation of the protocol detailed here:
 
 http://elektronikforumet.com/wiki/index.php/RF_Protokoll_-_Nexa/Proove_%28%C3%A4ldre,_ej_sj%C3%A4lvl%C3%A4rande%29
+
+# SEE ALSO
+This Python version is a re-implementation of the original Raspberry Strogonanoff by Duncan McGregor:
+
+https://github.com/dmcg/raspberry-strogonanoff
+
+I have ported Raspberry Strogonanoff to 'C'. See my implementation here:
+
+https://github.com/himslm01/N38HN
 
 # OPTIONS
     -v, --verbose   enable verbose logging
